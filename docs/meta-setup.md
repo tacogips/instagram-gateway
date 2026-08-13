@@ -45,6 +45,21 @@ Writer baseline: reader baseline plus `instagram_content_publish` and `instagram
 
 Optional writer insights: include reader insight scopes only when a write workflow also needs account/media validation.
 
+## Messaging Scopes And Fixtures
+
+Instagram Login messaging requires `instagram_business_basic` and
+`instagram_business_manage_messages`; private replies instead require
+`instagram_business_manage_comments`. Facebook Login messaging requires
+`instagram_basic`, `instagram_manage_messages`, and `pages_manage_metadata`;
+private replies require `instagram_basic`, `instagram_manage_comments`, and
+`pages_read_engagement`. Do not substitute a deprecated Page-messaging scope
+for this matrix.
+
+Only configure a self-owned IGSID/conversation fixture for transient reader
+verification. Do not provision this workflow to send DMs, reactions, private
+replies, sender actions, or attachments. Messenger Profile mutations require a
+separate owned account and a snapshot/restore procedure.
+
 Meta may gate or rename permissions by app type, API version, login product,
 account type, and app review state. During browser setup, record the current
 Meta permission name, date checked, and the reader or writer command that needs

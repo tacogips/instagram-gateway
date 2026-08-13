@@ -13,6 +13,22 @@ swift run instagram-gateway-reader media list --account-id "$INSTAGRAM_GATEWAY_T
 swift run instagram-gateway-reader insights account --account-id "$INSTAGRAM_GATEWAY_TEST_IG_USER_ID" --metric impressions,reach --period day --pretty
 ```
 
+## Messaging
+
+Messaging is `META_BLOCKED` until the selected profile has the documented
+login-specific scopes and a controlled self-owned fixture. When those external
+prerequisites are available, safe transient reads are limited to:
+
+```bash
+swift run instagram-gateway-reader messaging conversations find --recipient-igsid "$INSTAGRAM_GATEWAY_META_SANDBOX_SELF_IGSID" --pretty
+swift run instagram-gateway-reader messaging profile get --recipient-igsid "$INSTAGRAM_GATEWAY_META_SANDBOX_SELF_IGSID" --pretty
+```
+
+Do not live-run sends, reactions, private replies, sender actions, attachment
+uploads, or template messages. Ice-breaker and persistent-menu writes require
+an owned account, an in-memory snapshot/restore flow, and verified restoration;
+otherwise record `meta_prerequisite_blocked` and do not mutate.
+
 ## Writer Diagnostics
 
 ```bash

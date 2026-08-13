@@ -56,6 +56,8 @@ swift run instagram-gateway-reader accounts pages --pretty
 swift run instagram-gateway-reader accounts business-discovery --username "<business-username>" --pretty
 swift run instagram-gateway-reader media list --account-id "$INSTAGRAM_GATEWAY_TEST_IG_USER_ID" --limit 5 --pretty
 swift run instagram-gateway-reader insights account --account-id "$INSTAGRAM_GATEWAY_TEST_IG_USER_ID" --metric impressions,reach --period day --pretty
+swift run instagram-gateway-reader hashtags search --account-id "$INSTAGRAM_GATEWAY_TEST_IG_USER_ID" --query swift --pretty
+swift run instagram-gateway-reader oembed get --url https://www.instagram.com/p/example/ --pretty
 ```
 
 Reader commands require a `read` credential profile. Writer verbs are rejected by the reader binary.
@@ -70,6 +72,28 @@ swift run instagram-gateway-writer comments hide --account "$INSTAGRAM_GATEWAY_T
 
 Writer mutation commands require a `write` credential profile and `--yes`.
 Use throwaway media, containers, and comments for live writer smoke tests.
+
+## Extended API safety
+
+Mention lookups, hashtag discovery, and oEmbed are typed reader operations.
+Mention replies remain writer-only and require `--yes`. Webhook consumers can
+use `InstagramWebhookDecoder.verifyAndDecode` to authenticate the exact raw
+request bytes with an app secret before decoding; callback hosting and Meta
+subscription setup are intentionally separate deployment prerequisites.
+
+## Messaging
+
+Messaging reader leaves cover conversations, messages, consent-gated user
+profiles, ice breakers, and persistent-menu reads. Writer leaves cover typed
+sends, private replies, reactions/unreactions, sender actions, reusable image
+attachments, and Messenger Profile changes; every mutation requires `--yes`.
+Instagram Login requires `instagram_business_basic` plus the relevant
+`instagram_business_manage_messages` or `instagram_business_manage_comments`
+scope. Facebook Login requires `instagram_basic`, the corresponding
+`instagram_manage_*` scope, `pages_manage_metadata`, and
+`pages_read_engagement` for private replies. Deterministic coverage is complete
+for these request contracts; live messaging verification is provider-gated and
+remains `META_BLOCKED` without controlled owned fixtures and permissions.
 
 ## Release
 
