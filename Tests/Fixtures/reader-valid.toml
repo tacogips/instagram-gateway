@@ -1,0 +1,23 @@
+default_credential = "reader"
+
+[[credentials]]
+id = "reader"
+provider = "meta-instagram"
+access_mode = "read"
+app_id_ref = "env:INSTAGRAM_GATEWAY_META_APP_ID"
+app_secret_ref = "env:INSTAGRAM_GATEWAY_META_APP_SECRET"
+access_token_ref = "env:INSTAGRAM_GATEWAY_READER_ACCESS_TOKEN"
+instagram_user_id = "17841400000000000"
+page_id = "100000000000000"
+scopes = ["instagram_basic", "pages_show_list"]
+
+[[credentials]]
+id = "writer"
+provider = "meta-instagram"
+access_mode = "write"
+app_id_ref = "env:INSTAGRAM_GATEWAY_META_APP_ID"
+app_secret_ref = "env:INSTAGRAM_GATEWAY_META_APP_SECRET"
+access_token_ref = "env:INSTAGRAM_GATEWAY_WRITER_ACCESS_TOKEN"
+instagram_user_id = "17841400000000000"
+page_id = "100000000000000"
+scopes = ["instagram_basic", "pages_show_list", "instagram_content_publish"]
