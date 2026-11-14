@@ -1,0 +1,12 @@
+default_credential = "taco-dev-sandbox-writer"
+
+[[credentials]]
+id = "taco-dev-sandbox-writer"
+provider = "meta-instagram"
+access_mode = "write"
+app_id_ref = "env:INSTAGRAM_GATEWAY_META_SANDBOX_APP_ID"
+app_secret_ref = "env:INSTAGRAM_GATEWAY_META_SANDBOX_APP_SECRET"
+access_token_ref = "kinko:INSTAGRAM_GATEWAY_META_SANDBOX_WRITER_ACCESS_TOKEN"
+instagram_user_id = "INSTAGRAM_USER_ID_PLACEHOLDER"
+page_id = "PAGE_ID_PLACEHOLDER"
+scopes = ["instagram_basic", "pages_show_list", "instagram_content_publish", "instagram_manage_comments"]
